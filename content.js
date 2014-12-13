@@ -1,10 +1,21 @@
-/* Listens for DOM content returned from background.js */
+/*
+	Get the html body
+*/
 
-chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
-    /* If the received message has the expected format... */
-    if (msg.text && (msg.text == "report_back")) {
-        /* Call the specified callback, passing 
-           the web-pages DOM content as argument */
-        sendResponse(document.all[0].outerHTML);
-    }
+var links = new Array();
+
+if(document.getElementById("rso")) {
+	html_collection = document.getElementsByClassName("g");
+	for(i = 0; i < html_collection.length; i++) {
+		r_block = html_collection[i].getElementsByClassName("r")[0];
+		links.push(r_block.firstChild.href);
+	}
+}
+else {
+	console.log("Error: Element does not exist");
+}
+
+chrome.runtime.sendMessage({greeting: links}, function(response) {
+  console.log(response.farewell);
 });
+//sconsole.log(html_body);             //Gives you the whole HTML of the page
