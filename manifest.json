@@ -1,0 +1,24 @@
+{
+  "name": "Tabby",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Tabby allows you to tab through Google search results",
+  "homepage_url": "http://www.grantmcgovern.com/",
+
+  "content_scripts": [
+  	{
+  		"matches": ["*://*.google.com/*"],
+  		"js": ["content.js"]
+  	}
+  ],
+
+  "background": {
+  	"scripts": ["background.js"]
+  },
+
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Tabby"
+  }
+}
+
